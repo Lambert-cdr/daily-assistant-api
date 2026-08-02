@@ -43,11 +43,11 @@ def get_daily_advice(location: str):
     city_name = geo_response["results"][0]["name"] 
     
     # 2. Adım: Bulunan koordinatlara göre anlık sıcaklığı çekme
-    weather_url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}¤t_weather=true"
+    weather_url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current=temperature_2m"
     weather_response = requests.get(weather_url).json()
     
     # Gerçek sıcaklık verisini alıyoruz
-    temp = weather_response["current_weather"]["temperature"]
+    temp = weather_response["current"]["temperature_2m"]
     
     # Hava durumuna göre asistanın dinamik karar mekanizması
     if temp < 15:
